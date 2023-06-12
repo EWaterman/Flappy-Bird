@@ -6,14 +6,18 @@ public class PipeMiddleScript : MonoBehaviour
 {
     private static readonly int SCORE_FOR_ENTERING_PIPE = 1;
 
-    private LogicScript logic;
     private GameObject bird;
+
+    private LogicScript logic;
+    private SoundPlayerScript soundPlayer;
     private BirdScript birdScript;
 
     // Start is called before the first frame update
     void Start()
     {
         logic = GameObject.Find("LogicManager").GetComponent<LogicScript>();
+        soundPlayer = GameObject.Find("SoundManager").GetComponent<SoundPlayerScript>();
+
         bird = GameObject.Find("Bird");
         birdScript = bird.GetComponent<BirdScript>();
     }
@@ -30,6 +34,7 @@ public class PipeMiddleScript : MonoBehaviour
         if (collision.gameObject == bird && birdScript.IsBirdAlive())
         {
             logic.AddScore(SCORE_FOR_ENTERING_PIPE);
+            soundPlayer.PlayScoreAudio();
         }
     }
 }
